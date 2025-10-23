@@ -281,4 +281,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchName.set('');
     this.search();
   }
+
+  goHome(): void {
+    this.router.navigate(['/']);
+  }
 }

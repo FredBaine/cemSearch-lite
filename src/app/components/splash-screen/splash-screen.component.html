@@ -9,6 +9,17 @@
       <p class="subtitle">Greenwood Mississippi Cemetery Association</p>
     </div>
 
+    <div class="search-section">
+      <button 
+        mat-raised-button 
+        color="accent" 
+        (click)="goToSearch()" 
+        class="search-btn standalone-search">
+        <mat-icon>search</mat-icon>
+        Search Records
+      </button>
+    </div>
+
     <mat-card class="donation-card">
       <mat-card-content>
         <div class="donation-message">
@@ -16,7 +27,7 @@
           <h3>Support Our Mission</h3>
           <p>
             Please consider making a donation to help us maintain and preserve 
-            these important historical records for future generations.
+            this sacred ground and these important historical records for future generations.
           </p>
         </div>
         
@@ -28,15 +39,6 @@
             class="donate-btn">
             <mat-icon>volunteer_activism</mat-icon>
             Donate
-          </button>
-          
-          <button 
-            mat-raised-button 
-            color="accent" 
-            (click)="goToSearch()" 
-            class="search-btn">
-            <mat-icon>search</mat-icon>
-            Search Records
           </button>
         </div>
       </mat-card-content>

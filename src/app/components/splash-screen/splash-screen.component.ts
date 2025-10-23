@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-splash-screen',
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MatSnackBarModule],
   templateUrl: './splash-screen.component.html',
   styleUrls: ['./splash-screen.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +25,7 @@ export class SplashScreenComponent implements OnInit {
   isVisible = signal(true);
 
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   ngOnInit() {
     // Remove auto-navigation, let user choose when to proceed
@@ -37,7 +39,16 @@ export class SplashScreenComponent implements OnInit {
   }
 
   donate() {
-    // Placeholder for donation functionality
-    console.log('Donate button clicked - not yet implemented');
+    // Show "under construction" message using snackbar
+    this.snackBar.open(
+      '🚧 Donation feature under construction - Coming Soon! 🚧', 
+      'Close', 
+      {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['donation-snackbar']
+      }
+    );
   }
 }

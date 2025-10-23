@@ -1,6 +1,15 @@
 <div class="search-container">
   <div class="header">
-    <h2>Cemetery Search</h2>
+    <div class="header-content">
+      <button 
+        mat-icon-button 
+        (click)="goHome()" 
+        class="home-btn"
+        title="Back to Home">
+        <mat-icon>home</mat-icon>
+      </button>
+      <h2>Cemetery Search</h2>
+    </div>
   </div>
 
   <!-- Search Form -->
@@ -10,7 +19,7 @@
       <div class="search-row single-row">
         <div class="form-group name-search">
           <mat-form-field appearance="outline" class="search-input">
-            <mat-label>Name</mat-label>
+            <mat-label>Last Name</mat-label>
             <input 
               matInput
               [ngModel]="searchName()"
@@ -146,7 +155,8 @@
     <div class="empty-state">
       <h3>Cemetery Records Search</h3>
       <p>Search for cemetery records by occupant name (partial matches supported).</p>
-      <p>Enter an occupant name above and click Search or press Enter. Click any result row to view the location on the map.</p>
+      <p>Enter an occupant name above and click Search or press Enter. </p>
+      <p>Click any result row to view the location on the map.</p>
     </div>
   }
 </div>
