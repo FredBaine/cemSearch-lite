@@ -1,0 +1,116 @@
+<div class="search-container">
+  <div class="header">
+    <h2>Cemetery Search</h2>
+  </div>
+
+  <!-- Search Form -->
+  <div class="search-section">
+    
+    <div class="search-form">
+      <div class="search-row single-row">
+        <div class="form-group name-search">
+          <div class="input-with-clear">
+            <input 
+              type="text" 
+              id="searchName" 
+              [ngModel]="searchName()"
+              (ngModelChange)="searchName.set($event)"
+              (keypress)="onSearchNameKeyPress($event)"
+              (input)="onSearchNameInput()"
+              placeholder="Search by occupant name...">
+            @if (searchName()) {
+              <button 
+                type="button" 
+                class="clear-input-btn" 
+                (click)="clearSearchName()"
+                title="Clear name">
+                ✕
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="form-group search-actions-inline">
+          <label>&nbsp;</label> <!-- Empty label for alignment -->
+          <div class="search-buttons">
+            <button type="button" class="search-btn compact" (click)="search()" [disabled]="isLoading()">
+              @if (isLoading()) {
+                <span class="spinner"></span>
+              }
+              {{ isLoading() ? 'Searching...' : 'Search' }}
+            </button>
+            <button type="button" class="clear-btn compact" (click)="clearSearch()">
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  @if (records().length > 0 || isLoading()) {
+    <div class="results-section">
+      <div class="results-header">
+        <h3>Search Results</h3>
+        @if (currentSearchType() && !isLoading()) {
+          <div class="search-info">
+            <small class="search-type">Search type: {{ getSearchTypeDisplay() }}</small>
+          </div>
+        }
+        @if (!isLoading()) {
+          <div class="results-count">
+            Found {{ records().length }} record{{ records().length !== 1 ? 's' : '' }}
+          </div>
+        }
+      </div>
+
+      @if (isLoading()) {
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Searching records...</p>
+        </div>
+      }
+
+      @if (!isLoading() && records().length > 0) {
+        <div class="table-container">
+          <table class="records-table">
+            <thead>
+              <tr>
+                <th>Occupant Name</th>
+                <th>Section</th>
+                <th>Lot</th>
+                <th>Burial Date</th>
+              </tr>
+            </thead>
+        <tbody>
+          @for (record of records(); track record.id) {
+            <tr class="record-row clickable-row" (click)="onRowClick(record)">
+              <td>{{ record.occupant }}</td>
+              <td>{{ record.section }}</td>
+              <td>{{ record.lot }}</td>
+              <td>{{ record.burialDate }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (!isLoading() && records().length === 0) {
+    <div class="no-results">
+      <p>No records found matching your search criteria.</p>
+    </div>
+  }
+</div>
+}
+
+  <!-- Empty State -->
+  @if (records().length === 0 && !isLoading()) {
+    <div class="empty-state">
+      <h3>Cemetery Records Search</h3>
+      <p>Search for cemetery records by occupant name (partial matches supported).</p>
+      <p>Enter an occupant name above and click Search or press Enter. Click any result row to view the location on the map.</p>
+    </div>
+  }
+</div>
