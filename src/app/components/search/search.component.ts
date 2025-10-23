@@ -214,16 +214,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  clearSearch(): void {
-    this.searchName.set('');
-    this.selectedSection.set('');
-    this.selectedLot.set('');
-    this.records.set([]);
-    this.currentSearchType.set('');
-    // Ensure dropdown data is loaded after clearing
-    this.loadDropdownData();
-  }
-
   getSearchTypeDisplay(): string {
     switch (this.currentSearchType()) {
       case 'occupant-name': return 'Occupant Name';

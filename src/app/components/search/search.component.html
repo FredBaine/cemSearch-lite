@@ -10,7 +10,7 @@
       <div class="search-row single-row">
         <div class="form-group name-search">
           <mat-form-field appearance="outline" class="search-input">
-            <mat-label>Occupant Name</mat-label>
+            <mat-label>Name</mat-label>
             <input 
               matInput
               [ngModel]="searchName()"
@@ -35,7 +35,7 @@
           <div class="search-buttons">
             <button 
               mat-raised-button 
-              color="primary" 
+              color="accent" 
               (click)="search()" 
               [disabled]="isLoading()"
               class="search-btn">
@@ -43,12 +43,6 @@
                 <mat-spinner diameter="20"></mat-spinner>
               }
               {{ isLoading() ? 'Searching...' : 'Search' }}
-            </button>
-            <button 
-              mat-stroked-button 
-              (click)="clearSearch()"
-              class="clear-btn">
-              Clear
             </button>
           </div>
         </div>

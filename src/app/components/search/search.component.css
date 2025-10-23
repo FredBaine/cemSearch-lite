@@ -113,6 +113,7 @@
 
 .form-group.search-actions-inline {
   flex: 0 0 auto; /* Don't grow, just fit content */
+  margin-top: 4px; /* Reduced spacing above search button */
 }
 
 .search-buttons {
@@ -375,7 +376,7 @@
 /* Angular Material Responsive Design */
 .search-input {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 8px; /* Reduced from 16px */
 }
 
 .search-buttons {
@@ -384,8 +385,25 @@
   flex-wrap: wrap;
 }
 
-.search-btn, .clear-btn {
+.search-btn {
   min-width: 120px;
+  background-color: #28a745 !important; /* Green background for better visibility */
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+  transition: all 0.2s ease;
+}
+
+.search-btn:hover:not(:disabled) {
+  background-color: #218838 !important;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+  transform: translateY(-1px);
+}
+
+.search-btn:disabled {
+  background-color: #6c757d !important;
+  color: white !important;
+  opacity: 0.7;
 }
 
 /* Mobile Cards - Hidden on desktop */

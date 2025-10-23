@@ -1,3 +1,45 @@
-<div [@fadeOut]="isVisible ? 'visible' : 'hidden'" class="splash-screen">
-    <h1>Welcome</h1>
+<div [@fadeOut]="isVisible() ? 'visible' : 'hidden'" class="splash-screen">
+  <div class="splash-content">
+    <div class="logo-container">
+      <img src="assets/GMCA Logo.png" alt="Greenwood Mississippi Cemetery Association" class="gmca-logo">
+    </div>
+    
+    <div class="welcome-text">
+      <h1>Welcome</h1>
+      <p class="subtitle">Greenwood Mississippi Cemetery Association</p>
+    </div>
+
+    <mat-card class="donation-card">
+      <mat-card-content>
+        <div class="donation-message">
+          <mat-icon class="heart-icon">favorite</mat-icon>
+          <h3>Support Our Mission</h3>
+          <p>
+            Please consider making a donation to help us maintain and preserve 
+            these important historical records for future generations.
+          </p>
+        </div>
+        
+        <div class="action-buttons">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="donate()" 
+            class="donate-btn">
+            <mat-icon>volunteer_activism</mat-icon>
+            Donate
+          </button>
+          
+          <button 
+            mat-raised-button 
+            color="accent" 
+            (click)="goToSearch()" 
+            class="search-btn">
+            <mat-icon>search</mat-icon>
+            Search Records
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
