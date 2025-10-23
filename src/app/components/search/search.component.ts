@@ -6,9 +6,28 @@ import { Firestore, collection, query, where, getDocs, orderBy, limit } from '@a
 import { CemeteryRecord, CemeteryRecordWithId } from '../../types';
 import { SearchStateService } from '../../services/search-state.service';
 
+// Angular Material imports
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 @Component({
   selector: 'app-search',
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule, 
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatFormFieldModule
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -79,12 +98,18 @@ export class SearchComponent implements OnInit, OnDestroy {
       querySnapshot.docs.forEach(doc => {
         const record = doc.data() as CemeteryRecord;
         console.log('Sample record for dropdown:', record);
-        if (record.section) sectionsSet.add(record.section);
+        
+        // Filter out section '82 EAST' from dropdown options
+        if (record.section && record.section !== '82 EAST') {
+          sectionsSet.add(record.section);
+        }
         if (record.lot) lotsSet.add(record.lot);
         
         // Also check for capitalized field names
         const recordAny = record as any;
-        if (recordAny.Section) sectionsSet.add(recordAny.Section);
+        if (recordAny.Section && recordAny.Section !== '82 EAST') {
+          sectionsSet.add(recordAny.Section);
+        }
         if (recordAny.Lot) lotsSet.add(recordAny.Lot);
       });
       
@@ -142,16 +167,21 @@ export class SearchComponent implements OnInit, OnDestroy {
       const querySnapshot = await getDocs(q);
       console.log(`Firestore query returned ${querySnapshot.docs.length} documents`);
       
-      this.records.set(querySnapshot.docs.map(doc => {
-        const data = doc.data();
-        console.log(`Raw document data for ${doc.id}:`, data);
-        return {
-          id: doc.id,
-          ...data
-        } as CemeteryRecordWithId;
-      }));
+      // Filter out records with section = '82 EAST'
+      const filteredRecords = querySnapshot.docs
+        .map(doc => {
+          const data = doc.data();
+          console.log(`Raw document data for ${doc.id}:`, data);
+          return {
+            id: doc.id,
+            ...data
+          } as CemeteryRecordWithId;
+        })
+        .filter(record => record.section !== '82 EAST');
+      
+      this.records.set(filteredRecords);
 
-      console.log('Records after mapping:', this.records().length);
+      console.log(`Records after filtering out section '82 EAST': ${this.records().length}`);
       if (this.records().length > 0) {
         console.log('Sample record structure:', Object.keys(this.records()[0]));
         console.log('First record data:', this.records()[0]);

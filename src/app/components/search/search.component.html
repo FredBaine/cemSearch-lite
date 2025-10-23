@@ -9,10 +9,10 @@
     <div class="search-form">
       <div class="search-row single-row">
         <div class="form-group name-search">
-          <div class="input-with-clear">
+          <mat-form-field appearance="outline" class="search-input">
+            <mat-label>Occupant Name</mat-label>
             <input 
-              type="text" 
-              id="searchName" 
+              matInput
               [ngModel]="searchName()"
               (ngModelChange)="searchName.set($event)"
               (keypress)="onSearchNameKeyPress($event)"
@@ -21,25 +21,33 @@
             @if (searchName()) {
               <button 
                 type="button" 
-                class="clear-input-btn" 
+                matSuffix
+                mat-icon-button
                 (click)="clearSearchName()"
                 title="Clear name">
-                ✕
+                <mat-icon>clear</mat-icon>
               </button>
             }
-          </div>
+          </mat-form-field>
         </div>
 
         <div class="form-group search-actions-inline">
-          <label>&nbsp;</label> <!-- Empty label for alignment -->
           <div class="search-buttons">
-            <button type="button" class="search-btn compact" (click)="search()" [disabled]="isLoading()">
+            <button 
+              mat-raised-button 
+              color="primary" 
+              (click)="search()" 
+              [disabled]="isLoading()"
+              class="search-btn">
               @if (isLoading()) {
-                <span class="spinner"></span>
+                <mat-spinner diameter="20"></mat-spinner>
               }
               {{ isLoading() ? 'Searching...' : 'Search' }}
             </button>
-            <button type="button" class="clear-btn compact" (click)="clearSearch()">
+            <button 
+              mat-stroked-button 
+              (click)="clearSearch()"
+              class="clear-btn">
               Clear
             </button>
           </div>
@@ -67,13 +75,47 @@
 
       @if (isLoading()) {
         <div class="loading">
-          <div class="spinner"></div>
+          <mat-spinner diameter="40"></mat-spinner>
           <p>Searching records...</p>
         </div>
       }
 
       @if (!isLoading() && records().length > 0) {
-        <div class="table-container">
+        <!-- Mobile Cards View -->
+        <div class="mobile-results">
+          @for (record of records(); track record.id) {
+            <mat-card class="record-card" (click)="onRowClick(record)">
+              <mat-card-content>
+                <div class="record-header">
+                  <h3 class="occupant-name">{{ record.occupant }}</h3>
+                  @if (record.burialDate) {
+                    <span class="burial-date">{{ record.burialDate }}</span>
+                  }
+                </div>
+                
+                @if (record.section || record.lot || record.site || record.space) {
+                  <div class="record-details">
+                    <div class="location-info">
+                      <mat-icon>place</mat-icon>
+                      <span>
+                        @if (record.section) { Section {{ record.section }} }
+                        @if (record.lot) { Lot {{ record.lot }} }
+                        @if (record.site) { Site {{ record.site }} }
+                        @if (record.space) { Space {{ record.space }} }
+                      </span>
+                    </div>
+                    <div class="card-action">
+                      <mat-icon>arrow_forward_ios</mat-icon>
+                    </div>
+                  </div>
+                }
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+
+        <!-- Desktop Table View -->
+        <div class="table-container desktop-results">
           <table class="records-table">
             <thead>
               <tr>
@@ -94,8 +136,8 @@
           }
         </tbody>
       </table>
-    </div>
-  }
+        </div>
+      }
 
   @if (!isLoading() && records().length === 0) {
     <div class="no-results">

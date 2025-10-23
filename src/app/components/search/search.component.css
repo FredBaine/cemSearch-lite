@@ -372,6 +372,130 @@
   background-color: #e3f2fd !important;
 }
 
+/* Angular Material Responsive Design */
+.search-input {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.search-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-btn, .clear-btn {
+  min-width: 120px;
+}
+
+/* Mobile Cards - Hidden on desktop */
+.mobile-results {
+  display: none;
+}
+
+.record-card {
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+}
+
+.record-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.record-card:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.occupant-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #1976d2;
+}
+
+.burial-date {
+  font-size: 14px;
+  color: #666;
+  background: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.record-details {
+  margin-top: 12px;
+  position: relative;
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.location-info mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.card-action {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  color: #999;
+}
+
+.card-action mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Desktop Table - Hidden on mobile */
+.desktop-results {
+  display: block;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .mobile-results {
+    display: block;
+  }
+  
+  .desktop-results {
+    display: none;
+  }
+  
+  .search-buttons {
+    flex-direction: column;
+  }
+  
+  .search-btn, .clear-btn {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .search-section {
+    padding: 12px 16px;
+  }
+}
+
 .status-badge {
   padding: 3px 8px;
   border-radius: 12px;

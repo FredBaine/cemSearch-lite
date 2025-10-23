@@ -2,6 +2,22 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
 
+## Environment Setup
+
+Before running the application, you need to set up your Firebase configuration:
+
+1. Copy the environment template:
+   ```bash
+   cp src/environments/environment.template.ts src/environments/environment.ts
+   ```
+
+2. Edit `src/environments/environment.ts` and replace the placeholder values with your actual Firebase configuration:
+   - Get your Firebase config from the Firebase Console > Project Settings > General > Your apps
+   - Replace `YOUR_FIREBASE_API_KEY_HERE` with your actual API key
+   - Replace other placeholder values with your project-specific values
+
+3. **Important**: Never commit `src/environments/environment.ts` to Git as it contains sensitive API keys
+
 ## Development server
 
 To start a local development server, run:
