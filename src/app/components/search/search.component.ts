@@ -214,13 +214,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  getSearchTypeDisplay(): string {
-    switch (this.currentSearchType()) {
-      case 'occupant-name': return 'Occupant Name';
-      default: return '';
-    }
-  }
-
   viewOnMap(record: CemeteryRecordWithId): void {
     if (record.section && record.lot) {
       // Save current state before navigation

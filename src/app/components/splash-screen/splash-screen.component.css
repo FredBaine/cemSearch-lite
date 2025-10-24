@@ -185,15 +185,3 @@
     margin: 0 auto;
   }
 }
-
-/* Custom styling for donation snackbar */
-:host ::ng-deep .donation-snackbar {
-  background-color: #ff9800 !important;
-  color: white !important;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-:host ::ng-deep .donation-snackbar .mat-mdc-snack-bar-action {
-  color: white !important;
-}

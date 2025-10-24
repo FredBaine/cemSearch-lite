@@ -64,11 +64,6 @@
     <div class="results-section">
       <div class="results-header">
         <h3>Search Results</h3>
-        @if (currentSearchType() && !isLoading()) {
-          <div class="search-info">
-            <small class="search-type">Search type: {{ getSearchTypeDisplay() }}</small>
-          </div>
-        }
         @if (!isLoading()) {
           <div class="results-count">
             Found {{ records().length }} record{{ records().length !== 1 ? 's' : '' }}
